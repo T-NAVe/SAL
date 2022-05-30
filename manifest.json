@@ -1,0 +1,27 @@
+{
+  "name": "SAL",
+  "description": "To stop those annoying sounds",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["tabs","storage", "scripting", "tabCapture", "activeTab"],
+  "content_scripts":[
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "/assets/icon16px.png",
+      "48": "/assets/icon48px.png",
+      "128": "/assets/icon128px.png"
+    }
+  },
+  "icons": {
+    "16": "/assets/icon16px.png",
+    "48": "/assets/icon48px.png",
+    "128": "/assets/icon128px.png"
+  },
+  "host_permissions": ["*://*/*"]
+}
