@@ -2,12 +2,85 @@
 <html>
   <head>
     <link rel="stylesheet" href="popup.css">    
+    <script src="popup.js"></script>
   </head>
   <body>
-    <button id="turnOnSAL">TURN ON SAL</button>
-    <p id="valBox">1</p>
-    <input id="volume" type="range" min="0" max="5" step="0.1" value="1">
-
+    <div class="main__container">
+      <div class="module">
+          <div class="module__info">
+              <div class="module__title">SAL</div>
+              <div class="module__shortdescription">Basic Settings</div>
+          </div>
+          <div class="basic__options">
+              <div class="item__bar__onoff">
+                  off
+                  <label class="switch">
+                      <input type="checkbox" checked>
+                      <span class="slider round"></span>
+                  </label>
+                  on
+              </div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">gain</div>
+                      <div class="item__info">
+                          <output id="bgain">0</output>dB
+                      </div>
+                  </div>
+                  <input type="range" min="-30" max='30' value="1" step="1" oninput="bgain.value = this.value">
+              </div>
+          </div>
+          <button onclick="myFunction()">Advanced Settings</button>
+          <div id="advanced__options">
+              <div class="module__shortdescription">Advanced Settings</div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">threshold</div>
+                      <div class="item__info">
+                          <output id="threshold">0</output>dB
+                      </div>
+                  </div>
+                  <input type="range" value="0" max="60" oninput="threshold.value = this.value">
+              </div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">knee</div>
+                      <div class="item__info">
+                          <output id="knee">0</output>dB
+                      </div>
+                  </div>
+                  <input type="range" value="0" max="30" oninput="knee.value = this.value">
+              </div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">ratio</div>
+                      <div class="item__info">
+                          <output id="ratio">0</output>:1
+                      </div>
+                  </div>
+                  <input type="range" value="0" max="10" oninput="ratio.value = this.value">
+              </div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">attack</div>
+                      <div class="item__info">
+                          <output id="attack">0</output>ms
+                      </div>
+                  </div>
+                  <input type="range" value="0,4" max="400" oninput="attack.value = this.value">
+              </div>
+              <div class="item__bar">
+                  <div class="item__bar__desc">
+                      <div class="text">Release</div>
+                      <div class="item__info">
+                          <output id="release">0</output> ms
+                      </div>
+                  </div>
+                  <input type="range" value="0" max="4000" oninput="release.value = this.value">
+              </div>
+          </div>
+      </div>
+  </div>
     <script src="popup.js"></script>
   </body>
 </html>
