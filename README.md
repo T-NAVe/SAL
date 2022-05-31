@@ -11,7 +11,6 @@ A few things you should know:
 * This uses a dynamic comp and a node gain, even tho' it's a very simple extension, it does not have the approach i would like. At the moment you can only "improve" the audio in videos since currently you cannot capture the audio directly fromt the tab due to a bug in the tabCapture API on manifest V3 apps.
 * Feel free to colaborate.
 
-
 ## Starting 🚀
 
 _Load the extension_
@@ -22,13 +21,10 @@ Follow this steps:
 * Open a video and press Turn on SAL button.
 * Done!
 
-
-
-## Author ✒️
-
+## Developers ✒️
 
 * **Luca de Acha** - [Github](https://github.com/T-NAVe) - [LinkedIn](https://www.linkedin.com/in/luca-de-acha/)
-
+* **Ismael Barea Insua** - [Github](https://github.com/quantosh) - [LinkedIn](https://www.linkedin.com/in/ismaelbareainsua/)
 
 ## License 📄
 
