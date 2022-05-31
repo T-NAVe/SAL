@@ -1,6 +1,11 @@
 // Initialize button with user's preferred color
-const turnOnSAL = document.getElementById("turnOnSAL");
+const turnOnSAL = document.getElementById("turnOnSAL")
 const volume = document.getElementById('volume')
+const threshold = document.getElementById('threshold')
+const knee = document.getElementById('knee')
+const ratio = document.getElementById('ratio')
+const attack = document.getElementById('attack')
+const release = document.getElementById('release')
 
 
 volume.addEventListener('input', function(event){
@@ -50,3 +55,17 @@ async function getActiveTabId () {
 function showVal(value){
   document.getElementById("valBox").innerHTML=value;
 }
+
+/**
+ * Hide & Show Basic Properties 0.1
+ */
+function myFunction() {
+  var x = document.getElementById("advanced__options");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    x.style.transition = "all 0.3s ease-in;"
+  } else {
+    x.style.display = "none";
+  }
+}
+
