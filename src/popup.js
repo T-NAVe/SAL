@@ -1,4 +1,4 @@
-// Initialize button with user's preferred color
+// Initialize buttons
 const turnOnSAL = document.getElementById("turnOnSAL")
 const volume = document.getElementById('volume')
 const threshold = document.getElementById('threshold')
@@ -19,8 +19,9 @@ volume.addEventListener('input', function(event){
 })
 
 
-// When the button is clicked, inject setPageBackgroundColor into current page
-turnOnSAL.addEventListener("click", async () => {
+// When the button is clicked, inject content.js into current page
+turnOnSAL.addEventListener("input", async (event) => {
+  console.log('event', event)
   console.log('click')
   const tabId = await getActiveTabId()
   // chrome.tabCapture.getMediaStreamId((streamId)=>{
@@ -28,25 +29,30 @@ turnOnSAL.addEventListener("click", async () => {
   //   const message = { name: 'turn-on-sal', tabId , streamId }
   //   turnOnSal(message)
   // })
-  chrome.scripting.executeScript(
-    {
-      target: { tabId },
-      files: ["src/content.js"],
-    },
-    () => {
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {name: 'turn-on-sal'}, function(response) {
-          console.log('response', response)
-        })
-      })
-    }
-  )
+  // chrome.scripting.executeScript(
+  //   {
+  //     target: { tabId },
+  //     files: ["src/content.js"],
+  //   },
+  //   () => {
+  //    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  //       chrome.tabs.sendMessage(tabId, {name: 'turn-on-sal'}, function(response) {
+  //         console.log('response', response)
+  //       })
+  //     //})
+  //   }
+  // )
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {name: 'turn-on-sal', tabId: tabs[0].id }, function(response) {
+      console.log('response', response)
+    })
+  })
 })
 
-function turnOnSal (message) {
-  console.log('turnOnSal', message)
-  chrome.runtime.sendMessage(message)
-}
+// function turnOnSal (message) {
+//   console.log('turnOnSal', message)
+//   chrome.runtime.sendMessage(message)
+// }
 
 async function getActiveTabId () {
   const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true })
@@ -60,7 +66,8 @@ function showVal(value){
  * Hide & Show Basic Properties 0.1
  */
 function myFunction() {
-  var x = document.getElementById("advanced__options");
+  console.log('myFunction')
+  let x = document.getElementById("advanced__options");
   if (x.style.display === "none") {
     x.style.display = "block";
     x.style.transition = "all 0.3s ease-in;"
