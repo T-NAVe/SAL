@@ -1,22 +1,23 @@
-var tabAudio ={
-  audioContext: null,
-  source : null,
-  comp : null,
-  gain : null,
-  state: 'off'
-}
-
+let audioContext = undefined
+let source = undefined
+let gain = undefined
+let comp = undefined
+let state = 'off'
+let MEDIA_ELEMENT_NODES = new WeakMap();
+console.log('CONTENT EXECUTED')
+//a good idea coud be that instead of recieving the order fromt the popup, i could just use the player itself and add a button to handle this.
 const messageHandler = (request, sender, sendResponse) => {
+  console.log('request', request)
   const handler = {
     'turn-on-sal': () => {
       console.log('SAL is on')
-      initSalOnTab()
+      initSalOnTab(request.tabId)
     },
     'volume': () => {
       sendResponse({
-        gain: tabAudio.gain.gain.value
+        gain: gain.gain.value
       })
-      tabAudio.gain.gain.value = request.value
+      gain.gain.value = request.value
     },
     'default': () => {
       return 'Default';
@@ -31,29 +32,57 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 })
 
 
-function initSalOnTab () {
-  tabAudio.state = 'on'
-  console.log('SAL IS INITIALIZED')
-  if(tabAudio.source){
-    tabAudio.source.disconnect()
+function initSalOnTab(tabId) {
+ 
+  //youd do only if off
+  if(audioContext === undefined) {
+    audioContext = new AudioContext()
   }
-  let element = document.querySelector("video");
-  console.log('element', element)
-  tabAudio.audioContext = new AudioContext()
-  tabAudio.comp = new DynamicsCompressorNode(tabAudio.audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
-  tabAudio.gain = new GainNode(tabAudio.audioContext, {gain: 1.3});
-  tabAudio.audioContext.createMediaElementSource(element).connect(tabAudio.gain).connect(tabAudio.comp).connect(tabAudio.audioContext.destination);
+  //on prime video should be videos[1] coz the first one is a trailer
+  let element = document.querySelector('video')
 
-  //tabAudio.source.connect(tabAudio.gain).connect(tabAudio.comp).connect(tabAudio.audioContext.destination);
+  comp = new DynamicsCompressorNode(audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
+  gain = new GainNode(audioContext, {gain: 1.3})
+  if(MEDIA_ELEMENT_NODES.has(element)) {
+    source = MEDIA_ELEMENT_NODES.get(element)
+  }else{
+    source = audioContext.createMediaElementSource(element)
+    MEDIA_ELEMENT_NODES.set(element, source)
+  }
+  //so i added this but idk if it works.
+  //the jist of it is that chrome does not want to let go of the sourceNode that easy
+  //in theory using a weakmap would be a good idea as a work arround, but is not entirely working
+  MEDIA_ELEMENT_NODES.get(element).connect(comp).connect(gain).connect(audioContext.destination)
+
+  state = 'on'
+  const config = { attributes: true, childList: true, subtree: true };
+    const callback = function(mutationList, observer) {
+    for(const mutation of mutationList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+          //works on youtube for some reason, but not in netflix, for the time being i should add condition to set off on netflix
+          // on netflix the problem we get is that supposedly the video is not loaded yet or something like that
+          // since it returns that the HTMLmediaElement is not valid. Meaby with a timeout?...
+          let element = document.querySelector('video')
+
+          // comp = new DynamicsCompressorNode(audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
+          // gain = new GainNode(audioContext, {gain: 1.3})
+          if(MEDIA_ELEMENT_NODES.has(element)) {
+            source = MEDIA_ELEMENT_NODES.get(element)
+          }else{
+            source = audioContext.createMediaElementSource(element)
+            MEDIA_ELEMENT_NODES.set(element, source)
+          }
+          MEDIA_ELEMENT_NODES.get(element).connect(comp).connect(gain).connect(audioContext.destination)
+        }
+    }
+  };
+  const observer = new MutationObserver(callback);
+  observer.observe(element, config)
+
 }
 
 
-//NOT WORKING
-/**
- * Removes the tab from `tabs` object and closes its AudioContext.
- * This function gets called when a tab is closed.
- * @param tabId Tab ID
- */
+//NOT WORKING, KEEPING IT FOR REFERENCE
  async function disposeTab (tabId) {
   if (tabId in tabs) {
     (await tabs[tabId]).audioContext.close()
@@ -61,13 +90,8 @@ function initSalOnTab () {
   }
 }
 
-//NOT WORKING
-/**
- * Captures a tab's sound, allowing it to be programmatically modified.
- * Puts a promise into the `tabs` object. We only need to call this function
- * if the tab isn't yet in that object.
- * @param tabId Tab ID
- */
+//NOT WORKING, KEEPING IT FOR REFERENCE
+
  function captureTab (tabId) {
   tabs[tabId] = new Promise(async resolve => {
     const stream = await chrome.tabCapture.capture({ audio: true, video: false })

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="popup.css">    
-    <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
     <div class="main__container">
@@ -15,7 +14,7 @@
               <div class="item__bar__onoff">
                   off
                   <label class="switch">
-                      <input type="checkbox" checked>
+                      <input type="checkbox" id=turnOnSAL>
                       <span class="slider round"></span>
                   </label>
                   on
@@ -24,10 +23,10 @@
                   <div class="item__bar__desc">
                       <div class="text">gain</div>
                       <div class="item__info">
-                          <output id="bgain">0</output>dB
+                          <output id="valBox">1</output>dB
                       </div>
                   </div>
-                  <input type="range" min="-30" max='30' value="1" step="1" oninput="bgain.value = this.value">
+                  <input id="volume" type="range" min="0" max='5' value="1" step="0.1">
               </div>
           </div>
           <button onclick="myFunction()">Advanced Settings</button>
