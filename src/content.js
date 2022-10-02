@@ -1,21 +1,9 @@
-// var tabAudio = new WeakMap()
-// var state = {}
-// var audioContext = {}
-// var comp = {}
-// var gain = {}
-// var source = {}
-// tabAudio.set(state, 'off')
-// tabAudio.set(audioContext)
-// tabAudio.set(source)
-// tabAudio.set(comp)
-// tabAudio.set(gain)
-
-var audioContext = undefined
-var source = undefined
-var gain = undefined
-var comp = undefined
-var state = 'off'
-var MEDIA_ELEMENT_NODES = new WeakMap();
+let audioContext = undefined
+let source = undefined
+let gain = undefined
+let comp = undefined
+let state = 'off'
+let MEDIA_ELEMENT_NODES = new WeakMap();
 console.log('CONTENT EXECUTED')
 //a good idea coud be that instead of recieving the order fromt the popup, i could just use the player itself and add a button to handle this.
 const messageHandler = (request, sender, sendResponse) => {
@@ -42,23 +30,6 @@ const messageHandler = (request, sender, sendResponse) => {
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   messageHandler(request, sender, sendResponse)
 })
-// function analyzerInitialize() {
-//   if (context == undefined) {
-//     context = new AudioContext();
-//   }
-//   analyser = context.createAnalyser();
-//   canvas = analyserElement;
-//   ctx = canvas.getContext('2d');
-//   if (MEDIA_ELEMENT_NODES.has(audio)) {
-//     source = MEDIA_ELEMENT_NODES.get(audio);
-//   } else {
-//     source = context.createMediaElementSource(audio);
-//     MEDIA_ELEMENT_NODES.set(audio, source);
-//   }
-//   source.connect(analyser);
-//   analyser.connect(context.destination);
-//   frameLooper()
-
 
 
 function initSalOnTab(tabId) {
@@ -110,139 +81,8 @@ function initSalOnTab(tabId) {
 
 }
 
-// function initSalOnTab () {
-//   tabAudio.set(state, 'on')
-//   if(tabAudio.source){
-//     tabAudio.get(audioContext).disconnect()
-//     tabAudio.get(audioContext).close()
-//     tabAudio = new WeakMap()
-//   }
-//   let element = document.querySelector("video");
-//   console.log(element.src)
-//  /*
-// const audioCtx = new window.AudioContext();
-// const audioElem = document.querySelector('audio');
 
-// let options = {
-//   mediaElement: audioElem
-// }
-
-// let source = new MediaElementAudioSourceNode(audioCtx, options);
-// console.log(source.mediaElement);
-//  */
-
-
-//   console.log('element', element)
-//   tabAudio.set(audioContext,new AudioContext())
-//   tabAudio.set(source, new MediaElementAudioSourceNode(tabAudio.get(audioContext), {mediaElement: element}))
-//   tabAudio.set(comp, new DynamicsCompressorNode(tabAudio.get(audioContext), {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25}))
-//   tabAudio.set(gain, new GainNode(tabAudio.get(audioContext), {gain: 3}))
-//   tabAudio.get(source).connect(tabAudio.get(gain)).connect(tabAudio.get(comp)).connect(tabAudio.get(audioContext).destination)
-//   // tabAudio.get(audioContext).createMediaElementSource(element).connect(tabAudio.get(gain)).connect(tabAudio.get(comp)).connect(tabAudio.get(audioContext).destination)
-//   // tabAudio.comp = new DynamicsCompressorNode(tabAudio.audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
-//   // tabAudio.gain = new GainNode(tabAudio.audioContext, {gain: 1.3})
-//   // tabAudio.audioContext.createMediaElementSource(element).connect(tabAudio.gain).connect(tabAudio.comp).connect(tabAudio.audioContext.destination)
-
-//   const config = { attributes: true, childList: true, subtree: true };
-//   const callback = function(mutationList, observer) {
-//     for(const mutation of mutationList) {
-//         if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-//           //tabAudio.audioContext.mediaElementSource.disconnect()
-//           tabAudio.get(source).disconnect()
-//           tabAudio.get(audioContext).close()
-//           tabAudio = new WeakMap()
-//           tabAudio.set(audioContext,new AudioContext())
-//           tabAudio.set(source, new MediaElementAudioSourceNode(tabAudio.get(audioContext), {mediaElement: element}))
-//           tabAudio.set(comp, new DynamicsCompressorNode(tabAudio.get(audioContext), {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25}))
-//           tabAudio.set(gain, new GainNode(tabAudio.get(audioContext), {gain: 3}))
-//           tabAudio.get(source).connect(tabAudio.get(gain)).connect(tabAudio.get(comp)).connect(tabAudio.get(audioContext).destination)
-//           // tabAudio.audioContext = new AudioContext()
-//           // tabAudio.comp = new DynamicsCompressorNode(tabAudio.audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
-//           // tabAudio.gain = new GainNode(tabAudio.audioContext, {gain: 1.3})
-//           // tabAudio.audioContext.createMediaElementSource(element).connect(tabAudio.gain).connect(tabAudio.comp).connect(tabAudio.audioContext.destination)          
-
-//         }
-//     }
-//   };
-//   const observer = new MutationObserver(callback);
-
-//   observer.observe(element, config)
-
-//   //tabAudio.source.connect(tabAudio.gain).connect(tabAudio.comp).connect(tabAudio.audioContext.destination);
-// }
-
-/*
-var audioCtx;
-var analyserNode;
-var audioSourceNode;   
- 
-var audioEle;
-var wm = new WeakMap();
- 
-var firstFlag = true;
- 
-window.onload= function(){
-  audioEle = document.getElementById('myAudio');
-  audioEle.autoplay = true;
-  audioEle.preload = 'auto'; 
-}
- 
-function onAddFile(event) {
-  var files;
-  var reader = new FileReader();
-  
-  if(event.target.files){
-    files = event.target.files;
-  }else{ 
-    files = event.dataTransfer.files;   
-  }      
-      
-  reader.onload = function (event) {
-    
-    if(firstFlag){
-      // AudioContextの生成
-      audioCtx =  new AudioContext(); 
-      firstFlag = false;     
-    }    
-      
-    audioEle.onloadeddata = function (){ 
-      
-      if(audioSourceNode){
-        audioSourceNode.disconnect();
-      }          
-      
-      // WeakMapでHTMLMediaElementを管理する
-      if (wm.has(audioEle)) { 
-        audioSourceNode = wm.get(audioEle); 
-      } else { 
-        audioSourceNode = audioCtx.createMediaElementSource(audioEle); 
-        wm.set(audioEle, audioSourceNode); 
-      }      
-      
-      // AnalyserNodeの生成
-      if(analyserNode){
-        analyserNode.disconnect();
-      }                
-      analyserNode = audioCtx.createAnalyser();  
-     
-      audioSourceNode.connect(analyserNode);    
-      analyserNode.connect(audioCtx.destination);
-    };    
-      
-    audioEle.onerror = function (e) {
-      alert("このファイルは読み込めません。");
-    }  
-        
-    audioEle.src = reader.result;       
-  };
-  
-  if (files[0]){    
-    reader.readAsDataURL(files[0]); 
-  }
-}      
-*/
-
-//NOT WORKING
+//NOT WORKING, KEEPING IT FOR REFERENCE
  async function disposeTab (tabId) {
   if (tabId in tabs) {
     (await tabs[tabId]).audioContext.close()
@@ -250,7 +90,7 @@ function onAddFile(event) {
   }
 }
 
-//NOT WORKING
+//NOT WORKING, KEEPING IT FOR REFERENCE
 
  function captureTab (tabId) {
   tabs[tabId] = new Promise(async resolve => {

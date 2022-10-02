@@ -12,6 +12,12 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 
 })
 
+
+// NOT WORKING DUE TO BUG
+// CHECK ISSUE 627 https://github.com/GoogleChrome/chrome-extensions-samples/issues/627
+// AND https://bugs.chromium.org/p/chromium/issues/detail?id=1214847
+// currently is a workarround to use the tabCapture API that involves to create a "invisible" tab, and use it to capture the audio from that tab
+// not gonna botther tho.
 /*
 navigator.mediaDevices.getUserMedia({
   audio: {

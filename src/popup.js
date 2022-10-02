@@ -53,26 +53,15 @@ turnOnSAL.addEventListener("input", async (event) => {
 //   console.log('turnOnSal', message)
 //   chrome.runtime.sendMessage(message)
 // }
-
+function showVal(value){
+  document.getElementById("valBox").innerHTML=value;
+}
+//NOT WORKING, KEEPING IT FOR REFERENCE
 async function getActiveTabId () {
   const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true })
   return activeTab.id
-}
-function showVal(value){
-  document.getElementById("valBox").innerHTML=value;
 }
 
 /**
  * Hide & Show Basic Properties 0.1
  */
-function myFunction() {
-  console.log('myFunction')
-  let x = document.getElementById("advanced__options");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-    x.style.transition = "all 0.3s ease-in;"
-  } else {
-    x.style.display = "none";
-  }
-}
-
