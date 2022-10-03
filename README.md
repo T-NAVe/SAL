@@ -3,14 +3,12 @@
 **SAL** means **S**TOP **A**NNOYING **L**EVELS this extension focus on fixing those audio level differences in your browser via a compressor.
 
 ### Table of contents
-- [About](#About-the-extension)
-- [Get Started](#Starting-with-SAL)
-- [Author](#Developers)
-- [License](#License)
+- [About](#about-the-extension)
+- [Get Started](#starting-with-SAL)
+- [Author](#developers)
+- [License](#license)
 
 ### About the extension 🐱‍🐉
-
-**_Focuses _**
 
 A few things you should know:
 
