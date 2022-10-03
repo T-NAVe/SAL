@@ -1,10 +1,16 @@
 # SAL 🐱‍👤
 
-**_STOP ANNOYING LEVELS_**
+**SAL** means **S**TOP **A**NNOYING **L**EVELS this extension focus on fixing those audio level differences in your browser via a compressor.
 
-## SAL Extension 🐱‍🐉
+### Table of contents
+- [About](#About-the-extension)
+- [Get Started](#Starting-with-SAL)
+- [Author](#Developers)
+- [License](#License)
 
-**_This extension focuses on fixing those audio level differences via a compressor_**
+### About the extension 🐱‍🐉
+
+**_Focuses _**
 
 A few things you should know:
 
@@ -15,15 +21,14 @@ This issues does not happend with MV2, but currently you can't publish your exte
 * The extension wont work in HBO, the solution implemented is to capture the audio from the first video element on the page, in HBO the first video element will be a trailer, this is true even when you open a video, the trailer element is always in the background. This also mean that the extension wont work on other sites with similar structures.
 * Currenty the only features working are the TURN ON button and the gain range input.
 
-## Starting 🚀
-
-_Load the extension_
-Follow this steps:
-
-* Download/copy this repo in your computer.
-* Load the unpacked extension via chrome extension manager (Dev mode needs to be enabled).
-* Open a video and press Turn on SAL button. (You will notice a change in gain, this means that the extension is active, if this does not happen refresh the page and try again!)
-* Done!
+## Starting with SAL 🚀
+If you want to try SAL follow this steps:
+<ol>  
+<li>Download/copy this repo in your computer.</li>  
+<li>Load the unpacked extension via chrome extension manager (Dev mode needs to be enabled).</li>  
+<li>Open a video and press Turn on SAL button. (You will notice a change in gain, this means that the extension is active, if this does not happen refresh the page and try again!)</li>  
+<li>Done! ✅</li>  
+</ol>
 
 ## Developers ✒️
 
