@@ -1,7 +1,6 @@
 # SAL 🐱‍👤
 
-**SAL** transforms into the **SOUND SMOOTHENING SENSEI**, a wise mentor in the digital audio dojo. 🔊\
- Tired of the unpredictable audio roller coaster during your online adventures? Fear not, for SAL, is here to bring tranquility. With ninja-like precision, it gently smoothens audio levels, ensuring a serene and balanced auditory journey. 🐱‍👤🎵
+**SAL** gracefully transforms into the **SOUND AUDIO LEVELER**, a virtuoso in the realm of digital acoustics. 🔊 Fed up with the wild ride of unpredictable audio levels during your online adventures? Fret not, for SAL is here to usher in tranquility. With ninja-like finesse, it expertly smoothens audio levels, delivering a serene and harmonious auditory journey. 🐱‍👤🎵 Embrace the symphony of balanced sound with SAL, your trusty audio companion.
 
 ## For whom is this extension for 🐱‍🐉
 
