@@ -3,7 +3,7 @@
   "description": "To stop those annoying sounds",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["scripting", "activeTab"],
+  "permissions": ["activeTab"],
   "content_scripts":[
     {
       "matches": ["<all_urls>"],
