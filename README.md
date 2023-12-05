@@ -51,10 +51,19 @@ Not much really! Just try to keep it clean and readable. Avoid the use of semi-c
 
 - **Luca de Acha** - [Github](https://github.com/T-NAVe) - [LinkedIn](https://www.linkedin.com/in/luca-de-acha/)
 
-## Contributors ♥
+## Code contributors ♥
 
 - **Ismael Barea Insua** - [Github](https://github.com/quantosh) - [LinkedIn](https://www.linkedin.com/in/ismaelbareainsua/)
 
 ## License 📄
 
 This project is under MIT-license check [LICENSE.txt](./LICENSE.txt) for details.
+
+## TODOs 📝
+
+- [ ] Refactor stylesheets. Getting annoyed by those margins? I'll come around to fix it at some point, but feel free to tackle the [issue](https://github.com/T-NAVe/SAL/issues/3) if yuu want!
+- [ ] Add a way to donate to the project. Who knows people may even wan't to give me money for this, I don't expect it though and not a priority.
+- [ ] Add a way to save user preferences. I'm thinking of using chrome.storage, meaby add the posibility to save presets?
+- [ ] Find a better initial setting for the compressor. Need to try it out a bit more.
+- [ ] Analyze a way to make the extension work with other audio sources and iframe embeds.
+- [ ] Link TODOs with issues.
