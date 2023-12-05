@@ -3,6 +3,7 @@
 
 /*=============== VARIABLES CSS ===============*/
 :root {
+  font-size: 18px;
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
   --biggest-font-size: 4rem;
@@ -35,10 +36,9 @@
   background-color: #f7f7f7;
   padding: 6px;
   border-radius: 4px;
-  width: 100px;
+  width: 125px;
   border: 2px solid #eee;
-  margin: 10px;
-  
+  margin: 10px 10px 0px 10px;
 }
 
 .item__bar {
@@ -54,9 +54,10 @@
   font-weight: var(--font-medium);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   color: #000;
   margin-bottom: 3px;
+  gap: 5px;
 }
 
 .item__bar__desc {
@@ -82,7 +83,7 @@
 button {
   width: 100%;
   margin-bottom: 6px;
-  font-size: var(--desc-font-size);
+  font-size: var(--tiny-font-size);
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -95,20 +96,31 @@ button:hover {
  }
 
 .module__shortdescription {
-  font-size: var(--desc-font-size);
+  font-size: var(--tiny-font-size);
   font-weight: var(--font-medium);
   color: #000;
   text-align: center;
   margin-bottom: 6px;
+  width: 100%;
+  user-select: none;
+}
+
+.module__smalldescription {
+  display: block;
+  font-size: var(--desc-font-size);
+  font-weight: var(--font-medium);
+  color: #000;
+  text-align: center;
+  text-wrap: pretty;
+  width: 100%;
+  padding: 3px;
+  user-select: none;
 }
 
 .advanced__options {
   margin-top: 4px;
 }
 
-.basic__options {
-  
-}
 
 /*=============== Range CSS===============*/
 

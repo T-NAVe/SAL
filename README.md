@@ -1,38 +1,60 @@
 # SAL 🐱‍👤
 
-**SAL** means **S**TOP **A**NNOYING **L**EVELS this extension focus on fixing those audio level differences in your browser via a compressor.
+**SAL** transforms into the **SOUND SMOOTHENING SENSEI**, a wise mentor in the digital audio dojo. 🔊\
+ Tired of the unpredictable audio roller coaster during your online adventures? Fear not, for SAL, is here to bring tranquility. With ninja-like precision, it gently smoothens audio levels, ensuring a serene and balanced auditory journey. 🐱‍👤🎵
 
-### Table of contents
-- [About](#about-the-extension)
-- [Get Started](#starting-with-SAL)
-- [Author](#developers)
-- [License](#license)
+## For whom is this extension for 🐱‍🐉
 
-### About the extension 🐱‍🐉
+Introducing an innovative solution for the perpetual frustration of fluctuating audio levels while watching videos. Say goodbye to the annoyance of constantly adjusting your speaker volume with this extension. It ensures a consistent audio experience by automatically maintaining a steady volume for the videos you watch.
 
-A few things you should know:
+Are you tired of the sudden jolts in volume that leave you straining to hear or recoiling from the blast of sound? Imagine watching a movie without the constant need to fiddle with volume controls, where the audio remains balanced and enjoyable throughout. If you've ever experienced the irritation of a video starting off too quiet, only to then become too loud, this extension is your ideal companion. Embrace a seamless audio experience and bid farewell to the hassle of manual volume adjustments. Upgrade your viewing pleasure with this indispensable tool designed for your auditory comfort.
 
-* This uses a dynamic comp and a node gain, even tho' it's a very simple extension, it does not have the approach i would like. At the moment you can only "improve" the audio in videos since currently you cannot capture the audio directly fromt the tab due to a bug in the tabCapture API on manifest V3 apps.
-The issue mentioned can be followed in this thread [Chrome issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1214847) I will keep working on this extension from time to time, but until this issue is not successfully resolved I will have to work with the current aproach or with another workarround.
-This issues does not happend with MV2, but currently you can't publish your extension in that format, it needs to be MV3, so there is no point working on an extension in a format that cannot be published.
-* I know that the extension is currently a mess due to the multiple solutions I had to check due to the bug, but feel free to contribute.
-* The extension wont work in HBO, the solution implemented is to capture the audio from the first video element on the page, in HBO the first video element will be a trailer, this is true even when you open a video, the trailer element is always in the background. This also mean that the extension wont work on other sites with similar structures.
-* Currenty the only features working are the TURN ON button and the gain range input.
+**Disclaimer**: Results may vary depending on many factors, and we don't provide any guarantee of the extension working as expected. While we strive for excellence, use at your discretion, and we are not responsible for any unforeseen outcomes or disruptions in audio experiences.\
+Furthermore, **please note** that using this extension does not guarantee protection against dimension shifting, time travel, or encounters with intergalactic beings. Any such events are purely coincidental and not attributable to the functionality of this product. Viewer discretion is advised.
 
 ## Starting with SAL 🚀
+
 If you want to try SAL follow this steps:
-<ol>  
-<li>Download/copy this repo in your computer.</li>  
-<li>Load the unpacked extension via chrome extension manager (Dev mode needs to be enabled).</li>  
-<li>Open a video and press Turn on SAL button. (You will notice a change in gain, this means that the extension is active, if this does not happen refresh the page and try again!)</li>  
-<li>Done! ✅</li>  
-</ol>
+
+1. Download/copy this repo in your computer.
+2. Load the unpacked extension via chrome extension manager (Dev mode needs to be enabled), use the src/ directory.
+3. Open a video and press Turn on SAL button. (You will notice a change in gain, this means that the extension is active, if this does not happen refresh the page and try again!)
+4. Done!
+
+Extension will hopefully be deployed in the Chrome Web Store soon.
+
+## How to Contribute
+
+We welcome contributions from the community! There are several ways you can contribute to this project:
+
+### Reporting Bugs
+
+If you encounter any bugs or issues with the project, please open a new issue in the [Issues](https://github.com/T-NAVe/SAL/issues) section. Provide a detailed description of the problem, including steps to reproduce it.
+
+### Requesting Features
+
+If you have ideas for new features or improvements, please open a new issue in the [Issues](https://github.com/T-NAVe/SAL/issues) section. Clearly outline the proposed feature and any relevant details.
+
+### Code Contributions
+
+1. Fork the repository to your GitHub account.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature-name`.
+3. Make your changes and commit them: `git commit -m 'Description of the changes'`.
+4. Push the changes to your fork: `git push origin feature-name`.
+5. Open a pull request on the [Pull Requests](https://github.com/T-NAVe/SAL/pulls) page, detailing the changes made and the problem they solve.
+
+## Code Style
+
+Not much really! Just try to keep it clean and readable. Avoid the use of semi-colons and use single quotes for strings. If I see anything but a tab size of 2, I will considerit a personal attack and a crime against nature.
 
 ## Developers ✒️
 
-* **Luca de Acha** - [Github](https://github.com/T-NAVe) - [LinkedIn](https://www.linkedin.com/in/luca-de-acha/)
-* **Ismael Barea Insua** - [Github](https://github.com/quantosh) - [LinkedIn](https://www.linkedin.com/in/ismaelbareainsua/)
+- **Luca de Acha** - [Github](https://github.com/T-NAVe) - [LinkedIn](https://www.linkedin.com/in/luca-de-acha/)
+
+## Contributors ♥
+
+- **Ismael Barea Insua** - [Github](https://github.com/quantosh) - [LinkedIn](https://www.linkedin.com/in/ismaelbareainsua/)
 
 ## License 📄
 
-This project is under MIT-license check [MIT-LICENSE.txt](MIT-LICENSE.txt) for details.
+This project is under MIT-license check [LICENSE.txt](./LICENSE.txt) for details.

@@ -1,120 +1,233 @@
 let audioContext = undefined
-let source = undefined
-let gain = undefined
-let comp = undefined
-let state = 'off'
-let MEDIA_ELEMENT_NODES = new WeakMap();
-console.log('CONTENT EXECUTED')
-//a good idea coud be that instead of recieving the order fromt the popup, i could just use the player itself and add a button to handle this.
+let gainNode = undefined
+let compNode = undefined
+let videoConnected = false
+let mutationObserver = null
+
+const videoListeners = new Map()
+
+function getAudioContext() {
+  if (!audioContext) {
+    audioContext = new AudioContext()
+  }
+  return audioContext
+}
+
+const outputNodeMap = new Map()
+
+function getOutputNode(video) {
+  let outputNode = outputNodeMap.get(video)
+
+  if (outputNode === undefined) {
+    const audioCtx = getAudioContext();
+    compNode = new DynamicsCompressorNode(audioContext, INITIAL_COMP_PROPS)
+    gainNode = new GainNode(audioContext, INITIAL_GAIN_PROPS)
+    const source = new MediaElementAudioSourceNode(audioCtx, {
+      mediaElement: video,
+    })
+    outputNode = {
+      outputNode: source,
+      destinationConnected: false,
+      compressorConected: false,
+    };
+    outputNodeMap.set(video, outputNode)
+  }
+
+  return outputNode;
+}
+
+function connectVideo(video) {
+  const nodeData = getOutputNode(video)
+
+      // // Add the compressor node to the audio source
+      // source.disconnect(audioCtx.destination);
+      // source.connect(compressor);
+      // compressor.connect(audioCtx.destination);
+
+  const sourceNode = nodeData.outputNode; // source
+
+  if (!nodeData.compressorConected) {
+    const audioCtx = getAudioContext()
+    // outputNode.disconnect(audioCtx.destination);
+    // outputNode.connect(jungle.input);
+    sourceNode.connect(compNode).connect(gainNode).connect(audioCtx.destination)
+    nodeData.compressorConected = true
+  }
+
+  if (nodeData.destinationConnected) {
+    const audioCtx = getAudioContext()
+    sourceNode.disconnect(audioCtx.destination)
+    nodeData.destinationConnected = false
+  }
+  videoConnected = true;
+}
+
+function disconnectVideo(video) {
+  
+  const audioCtx = getAudioContext()
+  // // Remove the compressor node from the audio source
+  // source.disconnect(compressor);
+  // compressor.disconnect(audioCtx.destination);
+  // source.connect(audioCtx.destination);
+  
+  const nodeData = getOutputNode(video)
+  
+  const sourceNode = nodeData.outputNode
+  
+  if (nodeData.compressorConected) {
+    sourceNode.disconnect()
+    compNode.disconnect()
+    gainNode.disconnect()
+    nodeData.compressorConected = false
+  }
+
+  if (!nodeData.destinationConnected) {
+    sourceNode.connect(audioCtx.destination)
+    nodeData.destinationConnected = true
+  }
+
+}
+
+function disconnectAllVideos() {
+  outputNodeMap.forEach((_nodeData, video) => {
+    disconnectVideo(video)
+  });
+
+  videoListeners.forEach((listener, video) => {
+    video.removeEventListener('playing', listener)
+  });
+  videoConnected = false
+}
+
+
+const changeVideo = (newVideoEl) => {
+  connectVideo(newVideoEl)
+}
+
+const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
+
+
+const listener = (videoEl) => {
+  const listener = videoListeners.get(videoEl)
+  if (listener === undefined) {
+    const callback = () => {
+      changeVideo(videoEl);
+    };
+    videoEl.addEventListener('playing', callback)
+    videoListeners.set(videoEl, callback)
+  }
+
+  if (isVideoPlaying(videoEl)) {
+    changeVideo(videoEl);
+  }
+}
+
+function initVideoObservers() {
+  mutationObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes !== undefined && mutation.addedNodes !== null) {
+        mutation.addedNodes.forEach(function(newVideoEl) {
+          if (!(newVideoEl instanceof HTMLVideoElement)) {
+            if (newVideoEl.querySelectorAll !== undefined) {
+              newVideoEl.querySelectorAll('video').forEach((v) => {
+                listener(v)
+              })
+            }
+            return
+          }
+          listener(newVideoEl)
+        })
+      }
+    })
+  })
+
+  const observerConfig = {
+    childList: true,
+    subtree: true,
+  }
+
+  const targetNode = document.body
+  mutationObserver.observe(targetNode, observerConfig)
+
+  videoEls = document.querySelectorAll('video')
+  videoEls.forEach((v) => {
+    if (v instanceof HTMLVideoElement) {
+      listener(v)
+    }
+  })
+}
+
 const messageHandler = (request, sender, sendResponse) => {
-  console.log('request', request)
   const handler = {
-    'turn-on-sal': () => {
-      console.log('SAL is on')
-      initSalOnTab(request.tabId)
+    [MESSAGES.get]: () => {
+      const compProps = Object.keys(INITIAL_COMP_PROPS).reduce((acc, key) => {
+        acc[key] = compNode?.[key]?.value ?? INITIAL_COMP_PROPS[key]
+        return acc
+      }, {})
+      const response = {
+        enabled: videoConnected,
+        gain: gainNode?.gain?.value ?? INITIAL_GAIN_PROPS.gain,
+        ...compProps
+      }
+      sendResponse(response)
     },
-    'volume': () => {
+    [MESSAGES.turnOnSAL]: () => {
+      if (request.enabled !== undefined && request.enabled !== null) {
+        if (request.enabled) {
+          initVideoObservers()
+        } else if (!request.enabled && videoConnected) {
+          if (mutationObserver !== undefined && mutationObserver !== null) {
+            mutationObserver.disconnect()
+            mutationObserver = null
+          }
+          disconnectAllVideos()
+        }
+      }
+    },
+    [MESSAGES.gain]: () => {
       sendResponse({
-        gain: gain.gain.value
+        gain: gainNode.gain.value
       })
-      gain.gain.value = request.value
+      gainNode.gain.value = request.value
+    },
+    [MESSAGES.threshold]: () => {
+      sendResponse({
+        threshold: compNode.threshold.value
+      })
+      compNode.threshold.value = request.value
+    },
+    [MESSAGES.knee]: () => {
+      sendResponse({
+        knee: compNode.knee.value
+      })
+      compNode.knee.value = request.value
+    },
+    [MESSAGES.ratio]: () => {
+      sendResponse({
+        ratio: compNode.ratio.value
+      })
+      compNode.ratio.value = request.value
+    },
+    [MESSAGES.attack]: () => {
+      sendResponse({
+        attack: compNode.attack.value
+      })
+      compNode.attack.value = request.value
+    },
+    [MESSAGES.release]: () => {
+      sendResponse({
+        release: compNode.release.value
+      })
+      compNode.release.value = request.value
     },
     'default': () => {
-      return 'Default';
+      console.warn('No handler for this message!')
     }
   };
   return (handler[request.name] || handler['default'])();
 }
 
-
-chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
-  messageHandler(request, sender, sendResponse)
+chrome.runtime.onMessage.addListener(function(request, _sender, sendResponse) {
+  messageHandler(request, _sender, sendResponse)
+  return true
 })
-
-
-function initSalOnTab(tabId) {
- 
-  //youd do only if off
-  if(audioContext === undefined) {
-    audioContext = new AudioContext()
-  }
-  //on prime video should be videos[1] coz the first one is a trailer
-  let element = document.querySelector('video')
-
-  comp = new DynamicsCompressorNode(audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
-  gain = new GainNode(audioContext, {gain: 1.3})
-  if(MEDIA_ELEMENT_NODES.has(element)) {
-    source = MEDIA_ELEMENT_NODES.get(element)
-  }else{
-    source = audioContext.createMediaElementSource(element)
-    MEDIA_ELEMENT_NODES.set(element, source)
-  }
-  //so i added this but idk if it works.
-  //the jist of it is that chrome does not want to let go of the sourceNode that easy
-  //in theory using a weakmap would be a good idea as a work arround, but is not entirely working
-  MEDIA_ELEMENT_NODES.get(element).connect(comp).connect(gain).connect(audioContext.destination)
-
-  state = 'on'
-  const config = { attributes: true, childList: true, subtree: true };
-    const callback = function(mutationList, observer) {
-    for(const mutation of mutationList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-          //works on youtube for some reason, but not in netflix, for the time being i should add condition to set off on netflix
-          // on netflix the problem we get is that supposedly the video is not loaded yet or something like that
-          // since it returns that the HTMLmediaElement is not valid. Meaby with a timeout?...
-          let element = document.querySelector('video')
-
-          // comp = new DynamicsCompressorNode(audioContext, {threshold: -50, knee: 40, ratio: 12, attack: 0, release: 0.25})
-          // gain = new GainNode(audioContext, {gain: 1.3})
-          if(MEDIA_ELEMENT_NODES.has(element)) {
-            source = MEDIA_ELEMENT_NODES.get(element)
-          }else{
-            source = audioContext.createMediaElementSource(element)
-            MEDIA_ELEMENT_NODES.set(element, source)
-          }
-          MEDIA_ELEMENT_NODES.get(element).connect(comp).connect(gain).connect(audioContext.destination)
-        }
-    }
-  };
-  const observer = new MutationObserver(callback);
-  observer.observe(element, config)
-
-}
-
-
-//NOT WORKING, KEEPING IT FOR REFERENCE
- async function disposeTab (tabId) {
-  if (tabId in tabs) {
-    (await tabs[tabId]).audioContext.close()
-    delete tabs[tabId]
-  }
-}
-
-//NOT WORKING, KEEPING IT FOR REFERENCE
-
- function captureTab (tabId) {
-  tabs[tabId] = new Promise(async resolve => {
-    const stream = await chrome.tabCapture.capture({ audio: true, video: false })
-
-    const audioContext = new AudioContext()
-    const streamSource = audioContext.createMediaStreamSource(stream)
-    const gainNode = audioContext.createGain()
-    const compressorNode = audioContext.createDynamicsCompressor()
-    compressorNode.threshold.value = -50
-    compressorNode.knee.value = 40
-    compressorNode.ratio.value = 12
-    compressorNode.attack.value = 0
-    compressorNode.release.value = 0.25
-    gainNode.gain.value = 1.3
-    streamSource.connect(gainNode)
-    streamSource.connect(compressorNode)
-    compressorNode.connect(gainNode)
-    gainNode.connect(audioContext.destination)
-
-    // compressorNode.connect(audioContext.destination)
-    // streamSource.connect(gainNode)
-    // gainNode.connect(audioContext.destination)
-
-    resolve({ audioContext, streamSource, gainNode })
-  })
-}
