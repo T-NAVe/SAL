@@ -1,6 +1,6 @@
 # SAL 🐱‍👤
 
-**SAL** gracefully transforms into the **SOUND AUDIO LEVELER**, a virtuoso in the realm of digital acoustics. 🔊 Fed up with the wild ride of unpredictable audio levels during your online adventures? Fret not, for SAL is here to usher in tranquility. With ninja-like finesse, it expertly smoothens audio levels, delivering a serene and harmonious auditory journey. 🐱‍👤🎵 Embrace the symphony of balanced sound with SAL, your trusty audio companion.
+**SAL** gracefully transforms into the **SMOOTH AUDIO LEVELER**, a virtuoso in the realm of digital acoustics. 🔊 Fed up with the wild ride of unpredictable audio levels during your online adventures? Fret not, for SAL is here to usher in tranquility. With ninja-like finesse, it expertly smoothens audio levels, delivering a serene and harmonious auditory journey. 🐱‍👤🎵 Embrace the symphony of balanced sound with SAL, your trusty audio companion.
 
 ## For whom is this extension for 🐱‍🐉
 
