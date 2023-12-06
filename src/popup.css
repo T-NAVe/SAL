@@ -1,217 +1,173 @@
-/*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap");
+/* =============== GOOGLE FONTS =============== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap');
 
-/*=============== VARIABLES CSS ===============*/
+/* =============== VARIABLES CSS =============== */
 :root {
-  font-size: 18px;
-  /*========== Font and typography ==========*/
-  --body-font: "Poppins", sans-serif;
-  --biggest-font-size: 4rem;
-  --small-font-size: 0.813rem;
-  --smaller-font-size: 0.75rem;
-  --tiny-font-size: 0.625rem;
-  --desc-font-size: 0.525rem;
+    --font-size-base: 18px;
+    --body-font: 'Poppins', sans-serif;
 
-  /*========== Font weight ==========*/
-  --font-thin: 100;
-  --font-light: 200;
-  --font-medium: 400;
-  --font-bold: 700;
+    /* Font and typography */
+    --biggest-font-size: 4rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+    --tiny-font-size: 0.625rem;
+    --desc-font-size: 0.525rem;
+
+    /* Font weight */
+    --font-thin: 100;
+    --font-light: 200;
+    --font-medium: 400;
+    --font-bold: 700;
 }
 
+/* =============== RESET =============== */
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-
-.main__cointainer {
-  margin: 0px;
-  display: flex;
-  
+/* =============== LAYOUT =============== */
+.main_container {
+    margin: 0;
+    display: flex;
 }
 
 .module {
-  background-color: #f7f7f7;
-  padding: 6px;
-  border-radius: 4px;
-  width: 125px;
-  border: 2px solid #eee;
-  margin: 10px 10px 0px 10px;
+    background-color: #f7f7f7;
+    padding: 6px;
+    border-radius: 4px;
+    width: 125px;
+    border: 2px solid #eee;
+    margin: 10px 10px 0px 10px;
 }
 
-.item__bar {
-  font-size: var(--tiny-font-size);
-  font-weight: var(--font-medium);
-  align-items: center;
-  justify-content: center;
-  color: #000;  
+/* =============== HEADERS =============== */
+.module_info {
+    display: flex;
+    justify-content: space-between;
 }
 
-.item__bar__onoff {
-  font-size: var(--tiny-font-size);
-  font-weight: var(--font-medium);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  margin-bottom: 3px;
-  gap: 5px;
+.module_title {
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-bold);
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
 }
 
-.item__bar__desc {
-  display: flex;
-  justify-content: space-between;
+.module_short-description {
+    font-size: var(--tiny-font-size);
+    font-weight: var(--font-medium);
+    color: #000;
+    text-align: center;
+    margin-bottom: 6px;
+    width: 100%;
+    user-select: none;
 }
 
-.item__info {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+/* =============== BUTTONS =============== */
+.module_button {
+    width: 100%;
+    margin-bottom: 6px;
+    font-size: var(--tiny-font-size);
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    background: #d1d1d1;
+    padding: 5px;
 }
 
-.module__title {
-  font-size: var(--smaller-font-size);
-  font-weight: var(--font-bold);
-  color: #000;
-  text-align: center;
-  text-transform: uppercase;
-  border-radius: 3px;
-}
-
-.module__button {
-  width: 100%;
-  margin-bottom: 6px;
-  font-size: var(--tiny-font-size);
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  border-radius: 5px;
-  background: #d1d1d1;
-  padding: 5px;
+.module_button:hover {
+    filter: brightness(105%);
 }
 
 .small {
-  padding: 2px;
-  font-size: var(--desc-font-size) !important;
-  margin-bottom: 0px !important;
+    padding: 2px;
+    font-size: var(--desc-font-size) !important;
+    margin-bottom: 0px !important;
 }
 
-.module__button:hover {
-  filter: brightness(105%);
- }
-
-.module__shortdescription {
-  font-size: var(--tiny-font-size);
-  font-weight: var(--font-medium);
-  color: #000;
-  text-align: center;
-  margin-bottom: 6px;
-  width: 100%;
-  user-select: none;
-}
-
-.module__smalldescription {
-  display: block;
-  font-size: var(--desc-font-size);
-  font-weight: var(--font-medium);
-  color: #000;
-  text-align: center;
-  text-wrap: pretty;
-  width: 100%;
-  padding: 3px;
-  user-select: none;
-}
-
-
+/* =============== DETAILS =============== */
 details > summary {
-  list-style: none;
+    list-style: none;
 }
+
 details > summary:hover {
-  list-style: none;
+    list-style: none;
 }
 
-details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
-details > summary::-webkit-details-marker /* Safari */ {
-  display: none;
+details > summary::marker,
+details > summary::-webkit-details-marker {
+    display: none;
 }
 
-.advanced__options {
-  margin-top: 4px;
+.advanced_options {
+    margin-top: 4px;
 }
 
-
-/*=============== Range CSS===============*/
-
-input[type="range"] {
-  width: 100%;
-  cursor: pointer;
-  font-size: inherit;
+/* =============== RANGE INPUTS =============== */
+input[type='range'] {
+    width: 100%;
+    cursor: pointer;
+    font-size: inherit;
 }
 
-/*=============== Switch ON//OFF ===============*/
-
-/* The switch - the box around the slider */
+/* =============== SWITCH ON/OFF =============== */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 17px;
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-/* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  padding: 3px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    padding: 3px;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 11px;
-  width: 11px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+    content: '';
+    position: absolute;
+    height: 11px;
+    width: 11px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+    background-color: #2196f3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(10px);
-  -ms-transform: translateX(10px);
-  transform: translateX(10px);
+    transform: translateX(10px);
 }
 
-/* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }

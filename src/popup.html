@@ -1,101 +1,156 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="popup.css">
-  </head>
-  <body>
-    <main class="main__container">
-      <article class="module">
-        <header>
-          <div class="module__info">
-            <div class="module__title">SAL</div>
-            <div class="module__shortdescription">Basic Settings</div>
-          </div>
-          <div class="basic__options">
-            <div class="item__bar__onoff">
-              off
-              <label class="switch">
-                <input type="checkbox" id=turnOnSAL>
-                <span class="slider round"></span>
-              </label>
-              on
-            </div>
-            <div class="item__bar">
-              <div class="item__bar__desc">
-                <div class="text">Gain</div>
-                <div class="item__info">
-                  <output>1.3</output>dB
-                </div>
-              </div>
-              <input id="gain" type="range" min="0" max='5' value="1.3" step="0.1">
-            </div>
-          </div>
-        </header>
-        <details id="advanced__options">
-          <summary class="module__button">Advanced Settings</summary>
-          <div class="item__bar">
-            <div class="item__bar__desc">
-              <div class="text">threshold</div>
-              <div class="item__info">
-                <output>-50</output>dB
-              </div>
-            </div>
-            <input id="threshold" type="range" min="-100" max="0" value="-50" step="1">
-          </div>
-          <div class="item__bar">
-            <div class="item__bar__desc">
-              <div class="text">knee</div>
-              <div class="item__info">
-                <output>40</output>dB
-              </div>
-            </div>
-            <input id="knee" type="range" value="40" min="0" max="40" step="1">
-          </div>
-          <div class="item__bar">
-            <div class="item__bar__desc">
-              <div class="text">ratio</div>
-              <div class="item__info">
-                <output>12</output>:1
-              </div>
-            </div>
-            <input id="ratio" type="range" value="12" min="1" max="20" step="1">
-          </div>
-          <div class="item__bar">
-            <div class="item__bar__desc">
-              <div class="text">attack</div>
-              <div class="item__info">
-                <output>0</output>ms
-              </div>
-            </div>
-            <input id="attack" type="range" value="0" min="0" max="1" step="0.001">
-          </div>
-          <div class="item__bar">
-            <div class="item__bar__desc">
-              <div class="text">Release</div>
-              <div class="item__info">
-                <output>0.25</output> ms
-              </div>
-            </div>
-            <input id="release" type="range" value="0.25" min="0" max="1" step="0.05">
-          </div>
-        </details>
-        <footer>
-          <details class="module__info">
-            <summary class="module__shortdescription module__button small">More information</summary>
-            <div class="about__container">
-              <p class="module__smalldescription">This extension works best when the output volume of the video you are watchin is at 100%</p>
-            </div>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+        <main class="main_container">
+            <article class="module">
+                <header>
+                    <div class="module_info">
+                        <div class="module_title">SAL</div>
+                        <div class="module_short-description">
+                            Basic Settings
+                        </div>
+                    </div>
+                    <div class="basic_options">
+                        <div class="item_bar_onoff">
+                            off
+                            <label class="switch">
+                                <input type="checkbox" id="turnOnSAL" />
+                                <span class="slider round"></span>
+                            </label>
+                            on
+                        </div>
+                        <div class="item_bar">
+                            <div class="item_bar_desc">
+                                <div class="text">Gain</div>
+                                <div class="item_info">
+                                    <output>1.3</output>dB
+                                </div>
+                            </div>
+                            <input
+                                id="gain"
+                                type="range"
+                                min="0"
+                                max="5"
+                                value="1.3"
+                                step="0.1"
+                            />
+                        </div>
+                    </div>
+                </header>
+                <details id="advanced_options">
+                    <summary class="module_button">Advanced Settings</summary>
+                    <div class="item_bar">
+                        <div class="item_bar_desc">
+                            <div class="text">Threshold</div>
+                            <div class="item_info"><output>-50</output>dB</div>
+                        </div>
+                        <input
+                            id="threshold"
+                            type="range"
+                            min="-100"
+                            max="0"
+                            value="-50"
+                            step="1"
+                        />
+                    </div>
+                    <div class="item_bar">
+                        <div class="item_bar_desc">
+                            <div class="text">Knee</div>
+                            <div class="item_info"><output>40</output>dB</div>
+                        </div>
+                        <input
+                            id="knee"
+                            type="range"
+                            value="40"
+                            min="0"
+                            max="40"
+                            step="1"
+                        />
+                    </div>
+                    <div class="item_bar">
+                        <div class="item_bar_desc">
+                            <div class="text">Ratio</div>
+                            <div class="item_info"><output>12</output>:1</div>
+                        </div>
+                        <input
+                            id="ratio"
+                            type="range"
+                            value="12"
+                            min="1"
+                            max="20"
+                            step="1"
+                        />
+                    </div>
+                    <div class="item_bar">
+                        <div class="item_bar_desc">
+                            <div class="text">Attack</div>
+                            <div class="item_info"><output>0</output>ms</div>
+                        </div>
+                        <input
+                            id="attack"
+                            type="range"
+                            value="0"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                        />
+                    </div>
+                    <div class="item_bar">
+                        <div class="item_bar_desc">
+                            <div class="text">Release</div>
+                            <div class="item_info">
+                                <output>0.25</output> ms
+                            </div>
+                        </div>
+                        <input
+                            id="release"
+                            type="range"
+                            value="0.25"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                        />
+                    </div>
+                </details>
+                <footer>
+                    <details class="module_info">
+                        <summary
+                            class="module_short-description module_button small"
+                        >
+                            More information
+                        </summary>
+                        <div class="about_container">
+                            <p class="module_small-description">
+                                This extension works best when the output volume
+                                of the video you are watching is at 100%
+                            </p>
+                        </div>
+                        <div>
+                            <p class="module_small-description">
+                                Found a bug? Or have some feedback? Head to the
+                                <a
+                                    href="https://github.com/T-NAVe/SAL"
+                                    target="_blank"
+                                    referrerpolicy="no-referrer"
+                                    rel="me"
+                                    >Github repository</a
+                                >
+                            </p>
+                        </div>
+                    </details>
+                </footer>
+            </article>
             <div>
-              <p class="module__smalldescription">Found a bug? Or have some feedback? Head to the <a href="https://github.com/T-NAVe/SAL" target="_blank" referrerpolicy="no-referrer" rel="me" >Github repository</a></p>
+                <span class="module_small-description"
+                    >Having problems?
+                    <strong>Try refreshing the page (F5)</strong></span
+                >
             </div>
-          </details>
-        </footer>
-      </article>
-      <div>
-        <span class="module__smalldescription">Having problems? <strong>Try refreshing the page (F5)</strong></span>
-      </div>
-    </main>
-    <script src="constants.js"></script>
-    <script src="popup.js"></script>
-  </body>
+        </main>
+        <script src="constants.js"></script>
+        <script src="popup.js"></script>
+    </body>
 </html>
