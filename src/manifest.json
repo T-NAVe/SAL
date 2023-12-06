@@ -22,6 +22,5 @@
     "16": "/assets/icon16px.png",
     "48": "/assets/icon48px.png",
     "128": "/assets/icon128px.png"
-  },
-  "host_permissions": ["*://*/*"]
+  }
 }
