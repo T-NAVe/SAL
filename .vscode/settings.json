@@ -1,4 +1,5 @@
 {
   "editor.fontFamily": "Cascadia Code",
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
 }
