@@ -3,171 +3,192 @@
 
 /* =============== VARIABLES CSS =============== */
 :root {
-    --font-size-base: 18px;
-    --body-font: 'Poppins', sans-serif;
+  --font-size-base: 18px;
+  --body-font: 'Poppins', sans-serif;
 
-    /* Font and typography */
-    --biggest-font-size: 4rem;
-    --small-font-size: 0.813rem;
-    --smaller-font-size: 0.75rem;
-    --tiny-font-size: 0.625rem;
-    --desc-font-size: 0.525rem;
+  /* Font and typography */
+  --biggest-font-size: 4rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+  --tiny-font-size: 0.625rem;
+  --desc-font-size: 0.525rem;
 
-    /* Font weight */
-    --font-thin: 100;
-    --font-light: 200;
-    --font-medium: 400;
-    --font-bold: 700;
+  /* Font weight */
+  --font-thin: 100;
+  --font-light: 200;
+  --font-medium: 400;
+  --font-bold: 700;
 }
 
 /* =============== RESET =============== */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* =============== LAYOUT =============== */
 .main_container {
-    margin: 0;
-    display: flex;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  align-items: center;
 }
 
 .module {
-    background-color: #f7f7f7;
-    padding: 6px;
-    border-radius: 4px;
-    width: 125px;
-    border: 2px solid #eee;
-    margin: 10px 10px 0px 10px;
+  background-color: #f7f7f7;
+  padding: 6px;
+  border-radius: 4px;
+  width: 125px;
+  border: 2px solid #eee;
+  margin: 10px 10px 0px 10px;
+}
+
+.item_bar_desc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.item_bar_onoff {
+  display: flex;
+  justify-content: center;
 }
 
 /* =============== HEADERS =============== */
 .module_info {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .module_title {
-    font-size: var(--smaller-font-size);
-    font-weight: var(--font-bold);
-    color: #000;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 3px;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-bold);
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 3px;
 }
 
 .module_short-description {
-    font-size: var(--tiny-font-size);
-    font-weight: var(--font-medium);
-    color: #000;
-    text-align: center;
-    margin-bottom: 6px;
-    width: 100%;
-    user-select: none;
+  font-size: var(--tiny-font-size);
+  font-weight: var(--font-medium);
+  color: #000;
+  text-align: center;
+  margin-bottom: 6px;
+  width: 100%;
+  user-select: none;
 }
 
 /* =============== BUTTONS =============== */
 .module_button {
-    width: 100%;
-    margin-bottom: 6px;
-    font-size: var(--tiny-font-size);
-    cursor: pointer;
-    border: none;
-    text-align: center;
-    border-radius: 5px;
-    background: #d1d1d1;
-    padding: 5px;
+  width: 100%;
+  margin-bottom: 6px;
+  font-size: var(--tiny-font-size);
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  background: #d1d1d1;
+  padding: 5px;
 }
 
 .module_button:hover {
-    filter: brightness(105%);
+  filter: brightness(105%);
 }
 
 .small {
-    padding: 2px;
-    font-size: var(--desc-font-size) !important;
-    margin-bottom: 0px !important;
+  padding: 2px;
+  font-size: var(--desc-font-size) !important;
+  margin-bottom: 0px !important;
 }
 
 /* =============== DETAILS =============== */
 details > summary {
-    list-style: none;
+  list-style: none;
 }
 
 details > summary:hover {
-    list-style: none;
+  list-style: none;
 }
 
 details > summary::marker,
 details > summary::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 .advanced_options {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 /* =============== RANGE INPUTS =============== */
 input[type='range'] {
-    width: 100%;
-    cursor: pointer;
-    font-size: inherit;
+  width: 100%;
+  cursor: pointer;
+  font-size: inherit;
 }
 
 /* =============== SWITCH ON/OFF =============== */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 30px;
-    height: 17px;
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    padding: 3px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  padding: 3px;
 }
 
 .slider:before {
-    content: '';
-    position: absolute;
-    height: 11px;
-    width: 11px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
+  content: '';
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-    background-color: #2196f3;
+  background-color: #2196f3;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
-    transform: translateX(10px);
+  transform: translateX(10px);
 }
 
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
+}
+
+.module_refresh-page {
+  text-align: center;
+  padding: 5px;
+  margin: 0px 10px 0px 10px;
 }
